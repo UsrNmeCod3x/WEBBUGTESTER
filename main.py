@@ -37,7 +37,11 @@ def main():
         domain = wildcard.replace("*.", "")
         
         print(f"\n[*] Enumerating subdomains for {domain}")
-        subdomains = get_subdomains(domain)
+        try:
+            subdomains = get_subdomains(domain)
+        except Exception as e:
+            print(f"[-] Error enumerating subdomains for {domain}: {str(e)}")
+            sys.exit(1)
         
         if not subdomains:
             print(f"[-] No subdomains found for {domain}")
@@ -105,6 +109,8 @@ def main():
         sys.exit(0)
     except Exception as e:
         print(f"[-] Fatal error: {str(e)}")
+        if 'domain' in locals():
+            print(f"Domain being processed: {domain}")
         sys.exit(1)
 
 if __name__ == "__main__":

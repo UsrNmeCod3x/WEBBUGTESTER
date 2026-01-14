@@ -1,7 +1,7 @@
 import requests
 
 def get_subdomains(domains):
-    url = f"https://crt.sh/?q=%25.{domain}&output=json"
+    url = f"https://crt.sh/?q=%25.{domains}&output=json"
     subs = set()
 
     try:
